@@ -1,0 +1,72 @@
+========================================
+DATABASE CODE
+========================================
+
+desc membership
+desc trainer
+select * from trainer
+select * from membership
+select * from customer
+
+create table trainer(trainer_id varchar(20),trainer_name varchar(20),salary varchar(20));
+create table membership(cust_id varchar(20),date_created date,package_name varchar(20),expiry_date date,total_cost varchar(20),trainer_id varchar(20));
+create table customer(cust_id varchar(20),name varchar(20),age varchar(20),mob varchar(20),gender varchar(20),address varchar(20),email varchar(20),trainer_id varchar(20),package_name varchar(20),total_cost varchar(20));
+
+create table equipment(cust_id varchar(20),equipment_no varchar(20),equipment_type varchar(20),condition varchar(20));
+create table bill(cust_id varchar(20),bill_no varchar(20),total_cost varchar(20),paid_date date,package_name varchar(20));
+
+
+
+alter table trainer add constraint p11 primary key(trainer_id);
+
+alter table membership add constraint p12 primary key(cust_id);
+alter table customer add constraint p13 primary key(email);
+
+alter table equipment add constraint p14 primary key(equipment_no);
+alter table bill add constraint p15 primary key(bill_no);
+
+
+
+
+alter table membership add constraints f12 foreign key(trainer_id) references trainer(trainer_id) on delete set null;
+alter table customer add constraints f13 foreign key(trainer_id) references trainer(trainer_id) on delete set null;
+
+alter table customer add constraints f14 foreign key(cust_id) references membership(cust_id) on delete cascade;
+alter table equipment add constraints f15 foreign key(cust_id) references membership(cust_id) on delete cascade;
+alter table bill add constraints f16 foreign key(cust_id) references membership(cust_id) on delete cascade;
+
+alter table trainer add total varchar(30);
+
+==========================TRIGGER=============================
+
+create or replace trigger intotal
+after insert on customer
+for each row
+begin
+update trainer t
+set t.total=t.total + 1
+where t.trainer_id = :new.trainer_id;
+end;
+
+create or replace trigger detotal
+after delete on customer
+for each row
+begin
+update trainer t
+set t.total=t.total - 1
+where t.trainer_id = :old.trainer_id;
+end;
+================================================
+PROCEDURE
+================================================
+CREATE OR REPLACE PROCEDURE insertBILL(p_id in bill.CUST_ID%TYPE,
+P_bill_no in bill.bill_no%TYPE,
+P_TOTAL_COST in bill.TOTAL_COST%TYPE,
+P_PAID_DATE in bill.PAID_DATE%TYPE,
+P_PACKAGE_NAME in bill.PACKAGE_NAME%TYPE)
+is
+begin
+insert into bill values(P_id,P_bill_no ,P_TOTAL_COST ,P_PAID_DATE,P_PACKAGE_NAME);
+COMMIT;
+end;
+
