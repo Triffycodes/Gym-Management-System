@@ -1,4 +1,6 @@
 # Gym-Management-System
+[Live Demo](https://triffycodes.github.io/Gym-Management-System/) &nbsp; :point_left: Click here for live Demo
+##
 
 ![sorting1](https://github.com/Triffycodes/Gym-Management-System/assets/45749291/515f7dac-4618-4a13-b52f-6f7b0e152396)
 
