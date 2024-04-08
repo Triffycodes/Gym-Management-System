@@ -1,7 +1,7 @@
 # Gym-Management-System
-##
+
 ![sorting1](https://github.com/Triffycodes/Gym-Management-System/assets/45749291/515f7dac-4618-4a13-b52f-6f7b0e152396)
-##
+
 
 <img width="370" alt="Picture1" src="https://github.com/Triffycodes/Gym-Management-System/assets/45749291/72038c64-3e21-40a7-b97a-5af90a198cff">
 
